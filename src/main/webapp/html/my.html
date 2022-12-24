@@ -203,13 +203,14 @@
 
     }
     function createAccount() {
-        var nameValue = $("#input_name_new" + id).val();
-        var titleValue = $("#input_title_new" + id).val();
-        var raceValue = $("#input_race_new" + id).val();
-        var professionValue = $("#input_profession_new" + id).val();
-        var levelValue = $("#input_level_new" + id).val();
-        var birthdayValue = $("#input_birthday_new" + id).val();
-        var bannedValue = $("#input_banned_new" + id).val();
+        var nameValue = $("#input_name_new").val();
+        var titleValue = $("#input_title_new").val();
+        var raceValue = $("#input_race_new").val();
+        var professionValue = $("#input_profession_new").val();
+        var levelValue = $("#input_level_new").val();
+        var birthdayValue = $("#input_birthday_new").val();
+        var bannedValue = $("#input_banned_new").val();
+        let current_page = window.location.href;
         var url = "/rest/players";
 
         $ajax({
@@ -223,19 +224,19 @@
                 "title": titleValue,
                 "race": raceValue,
                 "profession": professionValue,
+                "banned": bannedValue,
                 "level": levelValue,
-                "birthday": new Date(birthdayValue).getTime(),
-                "banned": bannedValue
+                "birthday": new Date(birthdayValue).getTime()
             }),
             success: function () {
-                $("#input_name_new" + id).val("");
-                $("#input_title_new" + id).val("");
-                $("#input_race_new" + id).val("");
-                $("#input_profession_new" + id).val("");
-                $("#input_level_new" + id).val("");
-                $("#input_birthday_new" + id).val("");
-                $("#input_banned_new" + id).val("");
-                getList(getCurrentPage(""));
+                $("#input_name_new").val("");
+                $("#input_title_new").val("");
+                $("#input_race_new").val("");
+                $("#input_profession_new").val("");
+                $("#input_level_new").val("");
+                $("#input_birthday_new").val("");
+                $("#input_banned_new").val("");
+                getList(getCurrentPage());
             }
         });
     }
