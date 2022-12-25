@@ -32,7 +32,7 @@
     </thead>
 </table>
 
-<div id="paging_buttons"> Pages:</div>
+<div id="paging_buttons">Pages:</div>
 
 <hr>
 <h2>Create new account:</h2>
@@ -45,7 +45,7 @@
 <br>
 
 <label for="input_race_new">Race:</label>
-<select id="input_race_new" name='race'>
+<select id="input_race_new" name="race">
     <option value='HUMAN'>HUMAN</option>
     <option value='DWARF'>DWARF</option>
     <option value='ELF'>ELF</option>
@@ -57,15 +57,15 @@
 <br>
 
 <label for="input_profession_new">Profession:</label>
-<select id= "input_profession_new" name='profession'>
-    <option value ='WARRIOR'>WARRIOR</option>
-    <option value ='ROGUE'>ROGUE</option>
-    <option value ='SORCERER'>SORCERER</option>
-    <option value ='CLERIC'>CLERIC</option>
-    <option value ='PALADIN'>PALADIN</option>
-    <option value ='NAZGUL'>NAZGUL</option>
-    <option value ='WARLOCK'>WARLOCK</option>
-    <option value ='DRUID'>DRUID</option>
+<select id= "input_profession_new" name="profession">
+    <option value='WARRIOR'>WARRIOR</option>
+    <option value='ROGUE'>ROGUE</option>
+    <option value='SORCERER'>SORCERER</option>
+    <option value='CLERIC'>CLERIC</option>
+    <option value='PALADIN'>PALADIN</option>
+    <option value='NAZGUL'>NAZGUL</option>
+    <option value='WARLOCK'>WARLOCK</option>
+    <option value='DRUID'>DRUID</option>
 </select>
 <br>
 
@@ -75,13 +75,13 @@
 <br>
 
 <label for="input_birthday_new">Birthday:</label>
-<input type="date" id="input_birthday_new" name="birthday" min = "2000-01-01" max =  "3000-12-31">
+<input type="date" id="input_birthday_new" name="birthday" min="2000-01-01" max="3000-12-31">
 <br>
 
 <label for="input_banned_new">Banned:</label>
-<select id= "input_banned_new" name='banned'>
-    <option value ='false'>false</option>
-    <option value ='true'>true</option>
+<select id= "input_banned_new" name="banned">
+    <option value='false'>false</option>
+    <option value='true'>true</option>
 </select>
 <br><br>
 
@@ -133,21 +133,21 @@
 
         $("button.pgn-bnt-styled").remove();
 
-        for (let i = 0; i < pagesNumber; i++) {
-            let button = "<button>" + (i + 1) + "</button>";
-            let btn = $(button)
-                .attr('id', "paging_button_" + i)
-                .attr('onclick', "show_list(" + i + ")")
-                .addClass('pgn-bnt-styled');
-            $('#paging_buttons').append(btn);
+        for (let i = 0; i < pagesCount; i++) {
+            let button_tag = "<button>" + (i + 1) + "</button>";
+            let btn = $(button_tag)
+                .attr("id", "paging_button_" + i)
+                .attr("onclick", "show_list(" + i + ")")
+                .addClass("pgn-bnt-styled");
+            $("#paging_buttons").append(btn);
         }
 
         let identifier = "#paging_button_" + page_number;
-        $(identifier).css('color', "green");
+        $(identifier).css("color", "green");
     }
 
     function getTotalCount() {
-        let url = "/rest/players/count";
+        let url = "rest/players/count";
         let res = 0;
         $.ajax({
             url: url,
@@ -160,10 +160,10 @@
     }
 
     function deleteAcc(id) {
-        let url = "/rest/players/" + id;
+        let url = "rest/players/" + id;
         $.ajax({
             url: url,
-            type: 'DELETE',
+            type: "DELETE",
             success: function () {
                 show_list(getCurrentPage());
             }
@@ -175,17 +175,17 @@
         let identifier_delete = "#button_delete_" + id;
         $(identifier_delete).remove();
 
-        let save_image_tag = "<img src = '/img/save.png'>";
+        let save_image_tag = "<img src='/img/save.png'>";
         $(identifier_edit).html(save_image_tag);
 
         let current_tr_element = $(identifier_edit).parent().parent();
         let children = current_tr_element.children();
 
         let td_name = children[1];
-        td_name.innerHTML = "<input id ='input_name_" + id + "' type='text' value='" + td_name.innerHTML + "'>";
+        td_name.innerHTML = "<input id='input_name_" + id + "' type='text' value='" + td_name.innerHTML + "'>";
 
         let td_title = children[2];
-        td_title.innerHTML = "<input id ='input_title_" + id + "' type='text' value='" + td_title.innerHTML + "'>";
+        td_title.innerHTML = "<input id='input_title_" + id + "' type='text' value='" + td_title.innerHTML + "'>";
 
         let td_race = children[3];
         let race_id = "#select_race_" + id;
@@ -206,7 +206,7 @@
         $(banned_id).val(banned_current_value).change();
 
         let property_save_tag = "saveAcc(" + id + ")";
-        $(identifier_edit).attr("onclick", property_save_tag);
+        $(identifier_edit).attr("onclick", property_save_tag)
 
     }
     function createAcc() {
@@ -221,7 +221,7 @@
         let current_page = window.location.href;
 
         let url = "/rest/players";
-        $ajax({
+        $.ajax({
             url: url,
             type: "POST",
             dataType: "json",
